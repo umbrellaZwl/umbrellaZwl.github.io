@@ -1,0 +1,358 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>配置多个git账号ssh | Umbrella Zwl Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Umbrella Zwl">
+    
+    <meta name="description" content="单个账号的ssh配置第一步：检查是否已有SSH密钥一般SSH密钥会在c:/Users/you/.ssh目录下，查看此目录下是否有类似以下文件:
+
+id_dsa.pub
+id_ecdsa.pub
+id_ed25519.pub
+id_rsa.pub
+
+第二步：生成SSH密钥要生成新的密匙，请在命令终端中">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Umbrella Zwl Hexo" title="Umbrella Zwl Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Umbrella Zwl Hexo">Umbrella Zwl Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/08/25/blog000/" title="配置多个git账号ssh" itemprop="url">配置多个git账号ssh</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Umbrella Zwl">Umbrella Zwl</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-08-24T16:00:00.000Z" itemprop="datePublished">2016-08-25</time>
+    Updated:<time datetime="2016-08-25T06:28:05.322Z" itemprop="dateModified">2016-08-25</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#单个账号的ssh配置"><span class="toc-number">1.</span> <span class="toc-text">单个账号的ssh配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一步：检查是否已有SSH密钥"><span class="toc-number">1.1.</span> <span class="toc-text">第一步：检查是否已有SSH密钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二步：生成SSH密钥"><span class="toc-number">1.2.</span> <span class="toc-text">第二步：生成SSH密钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三步：新密钥添加到SSH-agent中"><span class="toc-number">1.3.</span> <span class="toc-text">第三步：新密钥添加到SSH agent中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第四步：将你的密匙加入到你的-Github-Gitlab-帐号中"><span class="toc-number">1.4.</span> <span class="toc-text">第四步：将你的密匙加入到你的 Github(Gitlab) 帐号中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五步：设置SSH-config"><span class="toc-number">1.5.</span> <span class="toc-text">第五步：设置SSH config</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第六步：测试生效"><span class="toc-number">1.6.</span> <span class="toc-text">第六步：测试生效</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置第二个账号SSH"><span class="toc-number">2.</span> <span class="toc-text">配置第二个账号SSH</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一步：新建user2的SSH-Key"><span class="toc-number">2.1.</span> <span class="toc-text">第一步：新建user2的SSH Key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二步：新密钥添加到SSH-agent中"><span class="toc-number">2.2.</span> <span class="toc-text">第二步：新密钥添加到SSH agent中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三步：将你的密匙加入到你的-Github-Gitlab-帐号中"><span class="toc-number">2.3.</span> <span class="toc-text">第三步：将你的密匙加入到你的 Github(Gitlab) 帐号中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第四步：修改config文件"><span class="toc-number">2.4.</span> <span class="toc-text">第四步：修改config文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五步：测试生效"><span class="toc-number">2.5.</span> <span class="toc-text">第五步：测试生效</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体怎么操作多个账号"><span class="toc-number">3.</span> <span class="toc-text">具体怎么操作多个账号</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一步：生成-git"><span class="toc-number">3.1.</span> <span class="toc-text">第一步：生成.git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二步：配置当前项目的username-和-email"><span class="toc-number">3.2.</span> <span class="toc-text">第二步：配置当前项目的username 和 email</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三步：链接远端仓库-git-remote-add"><span class="toc-number">3.3.</span> <span class="toc-text">第三步：链接远端仓库 - git remote add</span></a></li></ol></li></ol>
+		</div>
+		
+		<h2 id="单个账号的ssh配置"><a href="#单个账号的ssh配置" class="headerlink" title="单个账号的ssh配置"></a>单个账号的ssh配置</h2><h3 id="第一步：检查是否已有SSH密钥"><a href="#第一步：检查是否已有SSH密钥" class="headerlink" title="第一步：检查是否已有SSH密钥"></a>第一步：检查是否已有SSH密钥</h3><p>一般SSH密钥会在<code>c:/Users/you/.ssh</code>目录下，查看此目录下是否有类似以下文件:</p>
+<ul>
+<li>id_dsa.pub</li>
+<li>id_ecdsa.pub</li>
+<li>id_ed25519.pub</li>
+<li>id_rsa.pub</li>
+</ul>
+<h3 id="第二步：生成SSH密钥"><a href="#第二步：生成SSH密钥" class="headerlink" title="第二步：生成SSH密钥"></a>第二步：生成SSH密钥</h3><p>要生成新的密匙，请在命令终端中执行以下操作。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#新建SSH key：</span></div><div class="line">$ <span class="built_in">cd</span> ~/.ssh     <span class="comment"># 切换到C:\Users\Administrator\.ssh</span></div><div class="line">ssh-keygen -t rsa -C <span class="string">"mywork@email.com"</span>  <span class="comment"># 新建工作的SSH key</span></div><div class="line"><span class="comment"># 设置保存自己的密钥的文件，默认为id_rsa</span></div><div class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/c/Users/Administrator/.ssh/id_rsa): [Press enter]</div></pre></td></tr></table></figure><br>接下来，你会被要求键入密码（密码可以不填写，直接回车）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase): [Type a passphrase]</div><div class="line">Enter same passphrase again: [Type passphrase again]</div></pre></td></tr></table></figure><br>当输完密码后，你会看到如下提示：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Your identification has been saved <span class="keyword">in</span> /c/Users/you/.ssh/id_rsa.</div><div class="line">Your public key has been saved <span class="keyword">in</span> /c/Users/you/.ssh/id_rsa.pub.</div><div class="line">The key fingerprint is:</div><div class="line">01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your_email@example.com</div></pre></td></tr></table></figure></p>
+<h3 id="第三步：新密钥添加到SSH-agent中"><a href="#第三步：新密钥添加到SSH-agent中" class="headerlink" title="第三步：新密钥添加到SSH agent中"></a>第三步：新密钥添加到SSH agent中</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ssh-agent <span class="_">-s</span></div><div class="line"><span class="comment"># Agent pid 59566</span></div><div class="line">ssh-add /c/Users/you/.ssh/id_rsa.pub</div></pre></td></tr></table></figure>
+<h3 id="第四步：将你的密匙加入到你的-Github-Gitlab-帐号中"><a href="#第四步：将你的密匙加入到你的-Github-Gitlab-帐号中" class="headerlink" title="第四步：将你的密匙加入到你的 Github(Gitlab) 帐号中"></a>第四步：将你的密匙加入到你的 Github(Gitlab) 帐号中</h3><blockquote><p>打开<code>/c/Users/you/.ssh/id_rsa.pub</code>，复制里面的内容<br>登录你要用的账户的github账号，在导航中选择“Settings”<br>在二级导航处，选择 “SSH Keys” 选项，点击右上角的 “Add SSH Key” 按钮。<br>先将你的拷贝内容粘贴到 “Key” 一栏，再填写 “Title” 一栏。<br>最后别忘记点击 “Add key” 按钮确认。</p>
+</blockquote>
+<h3 id="第五步：设置SSH-config"><a href="#第五步：设置SSH-config" class="headerlink" title="第五步：设置SSH config"></a>第五步：设置SSH config</h3><p>在 <code>C:\用户\你的用户目录.ssh</code> 目录下新建 config 文件, 文件里录写入下述内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Host github.com</div><div class="line">HostName github.com</div><div class="line">User umbrellaZwl <span class="comment">#你的账户名</span></div><div class="line">PreferredAuthentications publickey</div><div class="line">IdentityFile C:\Users\umbrella\.ssh\id_rsa</div></pre></td></tr></table></figure></p>
+<h3 id="第六步：测试生效"><a href="#第六步：测试生效" class="headerlink" title="第六步：测试生效"></a>第六步：测试生效</h3><p>在终端中输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@github.com</div></pre></td></tr></table></figure>
+<p>之后应该会看到以下之类的提示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">The authenticity of host <span class="string">'github.com'</span> can<span class="string">'t be established.</span></div><div class="line">RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.</div><div class="line">Are you sure you want to continue connecting (yes/no)?</div></pre></td></tr></table></figure>
+<p>看到这个后输入<code>yes</code>，回车继续即可，<br>然后就会在<code>C:\用户\你的用户目录.ssh\konwn_hosts</code>文件里面生成信息。<br><em>注：第一次看到这个，总是以为默认<code>yes</code>，直接回车，然后使用总是出错，默哀！</em></p>
+<p>以上便是配置ssh的过程，如果要使用多个账号那么就需要按照以上过程再为另一个账号配置一个ssh<br>不嫌麻烦，咱们在重头来一遍：</p>
+<h2 id="配置第二个账号SSH"><a href="#配置第二个账号SSH" class="headerlink" title="配置第二个账号SSH"></a>配置第二个账号SSH</h2><h3 id="第一步：新建user2的SSH-Key"><a href="#第一步：新建user2的SSH-Key" class="headerlink" title="第一步：新建user2的SSH Key"></a>第一步：新建user2的SSH Key</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#新建SSH key：</span></div><div class="line">$ <span class="built_in">cd</span> ~/.ssh     <span class="comment"># 切换到C:\Users\Administrator\.ssh</span></div><div class="line">ssh-keygen -t rsa -C <span class="string">"mywork@email.com"</span>  <span class="comment"># 新建工作的SSH key</span></div><div class="line"><span class="comment"># 设置保存文件的名称，默认id_rsa，为了区分开，我设置为id_rsa_person</span></div><div class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/c/Users/Administrator/.ssh/id_rsa): id_rsa_person</div></pre></td></tr></table></figure>
+<h3 id="第二步：新密钥添加到SSH-agent中"><a href="#第二步：新密钥添加到SSH-agent中" class="headerlink" title="第二步：新密钥添加到SSH agent中"></a>第二步：新密钥添加到SSH agent中</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-add ~/.ssh/id_rsa_person</div></pre></td></tr></table></figure>
+<p>如果出现Could not open a connection to your authentication agent的错误，就试着用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-agent bash</div><div class="line">ssh-add ~/.ssh/id_rsa_person</div></pre></td></tr></table></figure>
+<h3 id="第三步：将你的密匙加入到你的-Github-Gitlab-帐号中"><a href="#第三步：将你的密匙加入到你的-Github-Gitlab-帐号中" class="headerlink" title="第三步：将你的密匙加入到你的 Github(Gitlab) 帐号中"></a>第三步：将你的密匙加入到你的 Github(Gitlab) 帐号中</h3><p>参照第一大节中的第四步，很简单，此处偷点懒。。。</p>
+<h3 id="第四步：修改config文件"><a href="#第四步：修改config文件" class="headerlink" title="第四步：修改config文件"></a>第四步：修改config文件</h3><p>针对这个账户添加config里面的配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># user2</span></div><div class="line">Host github.com</div><div class="line">HostName github.com</div><div class="line">User umbrellaZwl <span class="comment">#你的账户名</span></div><div class="line">PreferredAuthentications publickey</div><div class="line">IdentityFile C:\Users\umbrella\.ssh\id_rsa</div></pre></td></tr></table></figure>
+<h3 id="第五步：测试生效"><a href="#第五步：测试生效" class="headerlink" title="第五步：测试生效"></a>第五步：测试生效</h3><p>过程同第一大节中一样，省略。。。</p>
+<h2 id="具体怎么操作多个账号"><a href="#具体怎么操作多个账号" class="headerlink" title="具体怎么操作多个账号"></a>具体怎么操作多个账号</h2><h3 id="第一步：生成-git"><a href="#第一步：生成-git" class="headerlink" title="第一步：生成.git"></a>第一步：生成.git</h3><p>git 会把所有文件以及历史记录保存在你的项目中，创建一个新的仓库，首先要去到项目路径，执行 git init。然后git会创建一个隐藏的文件夹.git，所有的信息都储存在其中。</p>
+<h3 id="第二步：配置当前项目的username-和-email"><a href="#第二步：配置当前项目的username-和-email" class="headerlink" title="第二步：配置当前项目的username 和 email"></a>第二步：配置当前项目的username 和 email</h3><p>如果不需要切换提交的用户，这一步可以省略，直接使用全局的配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name <span class="string">"My Name"</span></div><div class="line">git config --global user.email <span class="string">"myEmail@example.com"</span></div></pre></td></tr></table></figure>
+<h3 id="第三步：链接远端仓库-git-remote-add"><a href="#第三步：链接远端仓库-git-remote-add" class="headerlink" title="第三步：链接远端仓库 - git remote add"></a>第三步：链接远端仓库 - git remote add</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin git@github.com:umbrellaZwl/hexo.git</div></pre></td></tr></table></figure>
+<p>之后就可以使用该账号向该远程仓库做git操作了</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/git/">git</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/git/">git</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2016/08/25/blog000/" data-title="配置多个git账号ssh | Umbrella Zwl Hexo" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/08/25/hello-world/" title="Hello World">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Hello World</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/08/19/markdown/"  title="markdown 语法简介(学习使用hexo)">
+ <strong>NEXT:</strong><br/> 
+ <span>markdown 语法简介(学习使用hexo)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#单个账号的ssh配置"><span class="toc-number">1.</span> <span class="toc-text">单个账号的ssh配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一步：检查是否已有SSH密钥"><span class="toc-number">1.1.</span> <span class="toc-text">第一步：检查是否已有SSH密钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二步：生成SSH密钥"><span class="toc-number">1.2.</span> <span class="toc-text">第二步：生成SSH密钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三步：新密钥添加到SSH-agent中"><span class="toc-number">1.3.</span> <span class="toc-text">第三步：新密钥添加到SSH agent中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第四步：将你的密匙加入到你的-Github-Gitlab-帐号中"><span class="toc-number">1.4.</span> <span class="toc-text">第四步：将你的密匙加入到你的 Github(Gitlab) 帐号中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五步：设置SSH-config"><span class="toc-number">1.5.</span> <span class="toc-text">第五步：设置SSH config</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第六步：测试生效"><span class="toc-number">1.6.</span> <span class="toc-text">第六步：测试生效</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置第二个账号SSH"><span class="toc-number">2.</span> <span class="toc-text">配置第二个账号SSH</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一步：新建user2的SSH-Key"><span class="toc-number">2.1.</span> <span class="toc-text">第一步：新建user2的SSH Key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二步：新密钥添加到SSH-agent中"><span class="toc-number">2.2.</span> <span class="toc-text">第二步：新密钥添加到SSH agent中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三步：将你的密匙加入到你的-Github-Gitlab-帐号中"><span class="toc-number">2.3.</span> <span class="toc-text">第三步：将你的密匙加入到你的 Github(Gitlab) 帐号中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第四步：修改config文件"><span class="toc-number">2.4.</span> <span class="toc-text">第四步：修改config文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五步：测试生效"><span class="toc-number">2.5.</span> <span class="toc-text">第五步：测试生效</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体怎么操作多个账号"><span class="toc-number">3.</span> <span class="toc-text">具体怎么操作多个账号</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一步：生成-git"><span class="toc-number">3.1.</span> <span class="toc-text">第一步：生成.git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二步：配置当前项目的username-和-email"><span class="toc-number">3.2.</span> <span class="toc-text">第二步：配置当前项目的username 和 email</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三步：链接远端仓库-git-remote-add"><span class="toc-number">3.3.</span> <span class="toc-text">第三步：链接远端仓库 - git remote add</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/categories/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/hexo开始/" title="hexo开始">hexo开始<sup>1</sup></a></li>
+		
+			<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://yoursite.com" target="_blank" title="Umbrella Zwl">Umbrella Zwl</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
