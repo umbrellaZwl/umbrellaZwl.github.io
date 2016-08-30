@@ -4,20 +4,13 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>markdown 语法简介(学习使用hexo) | Umbrella Zwl Hexo</title>
+    <title>响应式图片srcset,picture | Umbrella Zwl Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Umbrella Zwl">
     
-    <meta name="description" content="标题在文本前面加上 # 就可以设置标题格式，也可以增加一级标题，二级标题~~~~六级标题123# 标题1## 标题2## 标题3
-
-var data = [1,2,3];
-data.forEach(function(){
-  alert(1);
-})
-
-
-1234var data = [1,2,3]">
+    <meta name="description" content="srcset,sizes通过设置srcset，seze，w描述符等来提供图片资源和断点至于选择加载哪个最佳图片，完全交给浏览器去智能判断
+12&amp;lt;img src=&quot;example.jpg&quot; alt=&quot;example&quot;     srcset=&quot;example.jpg 128w, example2.">
     
     
     
@@ -73,15 +66,15 @@ data.forEach(function(){
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/08/19/markdown/" title="markdown 语法简介(学习使用hexo)" itemprop="url">markdown 语法简介(学习使用hexo)</a>
+      <a href="/2016/08/30/blog002/" title="响应式图片srcset,picture" itemprop="url">响应式图片srcset,picture</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="Umbrella Zwl">Umbrella Zwl</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-08-19T14:11:24.000Z" itemprop="datePublished">2016-08-19</time>
-    Updated:<time datetime="2016-08-25T02:36:42.246Z" itemprop="dateModified">2016-08-25</time>
+    <time datetime="2016-08-29T16:00:00.000Z" itemprop="datePublished">2016-08-30</time>
+    Updated:<time datetime="2016-08-30T08:11:30.098Z" itemprop="dateModified">2016-08-30</time>
     
   </p>
 </header>
@@ -90,73 +83,34 @@ data.forEach(function(){
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#标题"><span class="toc-number">1.</span> <span class="toc-text">标题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#列表"><span class="toc-number">2.</span> <span class="toc-text">列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#插入链接和图片"><span class="toc-number">3.</span> <span class="toc-text">插入链接和图片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#引用"><span class="toc-number">4.</span> <span class="toc-text">引用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#表格"><span class="toc-number">5.</span> <span class="toc-text">表格</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#srcset-sizes"><span class="toc-number">1.</span> <span class="toc-text">srcset,sizes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过picture标签来匹配不同查询"><span class="toc-number">2.</span> <span class="toc-text">通过picture标签来匹配不同查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#尺寸匹配"><span class="toc-number">2.1.</span> <span class="toc-text">尺寸匹配</span></a></li></ol></li></ol>
 		</div>
 		
-		<h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a><em>标题</em></h1><p>在文本前面加上 # 就可以设置标题格式，也可以增加一级标题，二级标题~~~~六级标题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 标题1</div><div class="line">## 标题2</div><div class="line">## 标题3</div></pre></td></tr></table></figure></p>
-<pre>
-var data = [1,2,3];
-data.forEach(function(){
-  alert(1);
-})
-</pre>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line">data.forEach(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  alert(<span class="number">1</span>);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a><em>列表</em></h1><p>在文本前面加上 <code>-</code> 即可设置列表格式，如果是有序列表直接加上1. 2. 就好</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- 列表1</div><div class="line">- 列表2</div><div class="line">- 列表3</div><div class="line">1. 列表4</div><div class="line">2. 列表4</div><div class="line">3. 列表4</div></pre></td></tr></table></figure>
-<h1 id="插入链接和图片"><a href="#插入链接和图片" class="headerlink" title="插入链接和图片"></a><em>插入链接和图片</em></h1><p><em>插入链接</em> 只需要 <a href="链接地址">显示文本</a> 这样的语法就好<br><em>插入图片</em> 只需要 <a href="链接地址">显示文本</a> 这样的语法就好,比插入链接多一个!</p>
-<p>这是一个<a href="https://hexo.io/zh-cn" target="_blank" rel="external">hexo</a>的尝试—–<a href="http://localhost:4000/" target="_blank" rel="external">umbrella</a></p>
-<img src="/images/test.jpg" width="200" height="200" title="This is an example image">
-<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a><em>引用</em></h1><blockquote>
-<p>万丈红尘，纷扰不休<br>初会便已许平生</p>
-</blockquote>
-<h1 id="表格"><a href="#表格" class="headerlink" title="表格"></a><em>表格</em></h1><p><strong>相关代码：</strong></p>
-<table>
-<thead>
-<tr>
-<th>Tables</th>
-<th style="text-align:center">Are</th>
-<th style="text-align:right">Cool</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>col 3 is</td>
-<td style="text-align:center">right-aligned</td>
-<td style="text-align:right">$1600</td>
-</tr>
-<tr>
-<td>col 2 is</td>
-<td style="text-align:center">centered</td>
-<td style="text-align:right">$12</td>
-</tr>
-<tr>
-<td>zebra stripes</td>
-<td style="text-align:center">are neat</td>
-<td style="text-align:right">$1</td>
-</tr>
-</tbody>
-</table>
+		<h2 id="srcset-sizes"><a href="#srcset-sizes" class="headerlink" title="srcset,sizes"></a>srcset,sizes</h2><p>通过设置srcset，seze，w描述符等来提供图片资源和断点<br>至于选择加载哪个最佳图片，完全交给浏览器去智能判断</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"example.jpg"</span> <span class="attr">alt</span>=<span class="string">"example"</span></span></div><div class="line">     <span class="attr">srcset</span>=<span class="string">"example.jpg 128w, example2.jpg 256w, example3.jpg 512w"</span>&gt;</div></pre></td></tr></table></figure>
+<p>看上述这段代码，我们给浏览器提供了3张不同大小的图片<br>其中w是一个描述符，w用来描述文件的宽度<br>这样浏览器会自动匹配最佳图片</p>
+<p>再看下面这段代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"example.jpg"</span> <span class="attr">alt</span>=<span class="string">"example"</span></span></div><div class="line">     <span class="attr">srcset</span>=<span class="string">"example.jpg 128w, example2.jpg 256w, example3.jpg 512w"</span></div><div class="line">     <span class="attr">sizes</span>=<span class="string">"(max-width: 360px) calc(100vw - 20px), 128px"</span>&gt;</div></pre></td></tr></table></figure>
+<p>通过sizes来指定断点，上述这段代码表示<br>当视区宽度不大于360px的时候，制定图片宽度为视区宽度减去20px，否则其他情况图片宽度为128px<br>有一个设备宽度360px的手机，设备像素比是1(去除干扰)，那么加载哪张图片呢？</p>
+<p><strong>分析：</strong></p>
+<p>通过calc的计算，图片宽度为340px，提供的三个图片资源只有512w能满足，所以会加载最后一张图片</p>
+<h2 id="通过picture标签来匹配不同查询"><a href="#通过picture标签来匹配不同查询" class="headerlink" title="通过picture标签来匹配不同查询"></a>通过picture标签来匹配不同查询</h2><h3 id="尺寸匹配"><a href="#尺寸匹配" class="headerlink" title="尺寸匹配"></a>尺寸匹配</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">picture</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">media</span>=<span class="string">"(max-width: 800px)"</span></span></div><div class="line">          <span class="attr">srcset</span>=<span class="string">"example.jpg 400w, example2.jpg 800w, example3.jpg 1200w"</span></div><div class="line">          <span class="attr">sizes</span>=<span class="string">"(min-width: 530px) calc(100vw - 96px), 100vw"</span>&gt;</div><div class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"example.jpg"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">picture</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>上述代码会首先让窗体去匹配source的查询，匹配到了则继续在该source里面的srcset进行选择<br>没有匹配到的则使用img里面的srcset</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/markdown/">markdown</a><a href="/tags/hexo开始/">hexo开始</a>
+  <span></span> <a href="/tags/html5/">html5</a><a href="/tags/css3/">css3</a>
   </div>
 
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/markdown/">markdown</a>
-</div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2016/08/19/markdown/" data-title="markdown 语法简介(学习使用hexo) | Umbrella Zwl Hexo" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2016/08/30/blog002/" data-title="响应式图片srcset,picture | Umbrella Zwl Hexo" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -165,14 +119,14 @@ data.forEach(function(){
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/08/25/blog001/" title="媒体查询表达式详解">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  媒体查询表达式详解</span>
+
+<div class="next">
+<a href="/2016/08/25/hello-world/"  title="Hello World">
+ <strong>NEXT:</strong><br/> 
+ <span>Hello World
+</span>
 </a>
 </div>
-
 
 </nav>
 
@@ -182,7 +136,7 @@ data.forEach(function(){
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#标题"><span class="toc-number">1.</span> <span class="toc-text">标题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#列表"><span class="toc-number">2.</span> <span class="toc-text">列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#插入链接和图片"><span class="toc-number">3.</span> <span class="toc-text">插入链接和图片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#引用"><span class="toc-number">4.</span> <span class="toc-text">引用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#表格"><span class="toc-number">5.</span> <span class="toc-text">表格</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#srcset-sizes"><span class="toc-number">1.</span> <span class="toc-text">srcset,sizes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过picture标签来匹配不同查询"><span class="toc-number">2.</span> <span class="toc-text">通过picture标签来匹配不同查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#尺寸匹配"><span class="toc-number">2.1.</span> <span class="toc-text">尺寸匹配</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
