@@ -859,6 +859,9 @@ article header.article-info >p.article-time:before {
 article .article-content {
   padding: 1.5em 4%;
 }
+article .article-content #toc {
+  display: none;
+}
 article .article-content #toc .toc {
   background-color: #eee;
 }
@@ -1404,6 +1407,7 @@ section.comment {
   padding: 0.3em 0;
 }
 #toc {
+  display: none;
   line-height: 1em;
   font-size: 0.8em;
   float: right;
@@ -1418,7 +1422,7 @@ section.comment {
   padding-left: 1.5em;
 }
 #toc.toc-aside {
-  display: none;
+  display: block;
   width: 13%;
   position: fixed;
   right: 2%;
@@ -1469,7 +1473,7 @@ section.comment {
   color: #ea6753 !important;
 }
 .openaside {
-  display: none;
+  display: block;
   position: fixed;
   right: 7.5%;
   top: 260px;
@@ -1512,6 +1516,7 @@ section.comment {
   }
 }
 #asidepart {
+  display: none;
   background: #fafafa;
   margin: 1em 0 0;
   padding: 0.5em 2% 1em;
