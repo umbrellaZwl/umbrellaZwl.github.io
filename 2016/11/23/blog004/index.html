@@ -1,0 +1,344 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>自定义指令 | Umbrella Zwl Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Umbrella Zwl">
+    
+    <meta name="description" content="基本用法angular中可以通过1234567m1.directive(&#39;aaa&#39;, function()&amp;#123;  return &amp;#123;    restrict: &#39;AE&#39;,    replace: true,    templateUrl: &#39;&#39;  &amp;#125;&amp;#125;)
+来创建自">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Umbrella Zwl Hexo" title="Umbrella Zwl Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Umbrella Zwl Hexo">Umbrella Zwl Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post moveMain" itemscope itemprop="blogPost">
+	<article itemprop="articleBody">
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/11/23/blog004/" title="自定义指令" itemprop="url">自定义指令</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Umbrella Zwl">Umbrella Zwl</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-11-22T16:00:00.000Z" itemprop="datePublished">2016-11-23</time>
+    Updated:<time datetime="2016-11-23T09:13:31.360Z" itemprop="dateModified">2016-11-23</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本用法"><span class="toc-number">1.</span> <span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#link"><span class="toc-number">2.</span> <span class="toc-text">link</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scope及其绑定策略"><span class="toc-number">3.</span> <span class="toc-text">scope及其绑定策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在link中使用第4个参数parentControllerInstance"><span class="toc-number">4.</span> <span class="toc-text">在link中使用第4个参数parentControllerInstance</span></a></li></ol>
+		</div>
+		
+		<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p>angular中可以通过<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">m1.directive(<span class="string">'aaa'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    restrict: <span class="string">'AE'</span>,</div><div class="line">    replace: <span class="literal">true</span>,</div><div class="line">    templateUrl: <span class="string">''</span></div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>来创建自定义指令<br>用法如上，对于return出来的对象中的参数，这里不做过多讲解。<br>主要讲一下指令和指令的交互，以及和dom的交互。</p>
+<h2 id="link"><a href="#link" class="headerlink" title="link"></a>link</h2><p>link也是return中的一个key，值是一个函数，如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">m1.directive(<span class="string">'aaa'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    restrict: <span class="string">'AE'</span>,</div><div class="line">    replace: <span class="literal">true</span>,</div><div class="line">    templateUrl: <span class="string">''</span>，</div><div class="line">    link: <span class="function"><span class="keyword">function</span>(<span class="params">scope, element, attrs, reController</span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(attrs)</div><div class="line">      element.bind(<span class="string">'mouseenter'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'鼠标进入了...'</span>)</div><div class="line">      &#125;)</div><div class="line">      element.bind(<span class="string">'mouseleave'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'鼠标离开了...'</span>)</div><div class="line">      &#125;)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>如上所示，link对应一个函数，函数一共有4个参数：<br><code>scope</code> —– 该指令的作用域<br><code>element</code> —– 该指令解析后的顶层元素<br><code>attrs</code> —– 该指令接收到的属性<br><code>reController</code> —- 父控制器<br>这样我们就可以在中通过<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">aaa</span> <span class="attr">from</span>=<span class="string">'a'</span> <span class="attr">to</span>=<span class="string">'b'</span>&gt;</span>hello custom directive<span class="tag">&lt;/<span class="name">aaa</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>使用这个指令了。其中的from和to会在attrs里面。</p>
+<h2 id="scope及其绑定策略"><a href="#scope及其绑定策略" class="headerlink" title="scope及其绑定策略"></a>scope及其绑定策略</h2><p>自定义指令中还有个属性叫做scope，默认值为false，表示继承父作用域<br>为<code>true</code> —- 表示继承父作用域，并创建自己的作用域(子作用域)<br>为<code>{}</code>   —- 表示创建一个全新的隔离作用域</p>
+<p>很多时候我们都会取值为隔离作用域<br>顺之，在隔离作用域中会有三种绑定策略<br>@ —- 使用@，表示字符串绑定<br>= —- 使用=，进行变量双向绑定<br>&amp; —- 使用&amp;，调用父作用域中的函数</p>
+<p>例如：<br>1.使用@绑定字符串<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">m1.directive(<span class="string">'hello'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    restrict: <span class="string">'AE'</span>,</div><div class="line">    scope: &#123;</div><div class="line">      <span class="keyword">from</span>: <span class="string">'@'</span></div><div class="line">    &#125;,</div><div class="line">    template: <span class="string">'&lt;div&gt;&#123;&#123;from&#125;&#125;&lt;/div&gt;'</span></div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">hello</span> <span class="attr">from</span>=<span class="string">'aaa'</span>&gt;</span><span class="tag">&lt;/<span class="name">hello</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>如此就可以在页面中看到一个div里面内容是aaa了。</p>
+<p>2.使用=绑定变量<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">m1.controller(<span class="string">'MyCtrl'</span>, [<span class="string">'$scope'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123;</div><div class="line">  $scope.parentfrom=<span class="string">"aaa"</span>;</div><div class="line">&#125;])</div><div class="line">m1.directive(<span class="string">"hello"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      restrict:<span class="string">'AE'</span>,</div><div class="line">      scope:&#123;</div><div class="line">        <span class="keyword">from</span>:<span class="string">'='</span></div><div class="line">      &#125;,</div><div class="line">      template:<span class="string">'&lt;input type="text" ng-model="from"/&gt;'</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"MyCtrl"</span>&gt;</span></div><div class="line">  Ctrl:</div><div class="line">  <span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">ng-model</span>=<span class="string">"parentfrom"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">  Directive:</div><div class="line">  <span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">hello</span> <span class="attr">from</span>=<span class="string">"parentfrom"</span>&gt;</span><span class="tag">&lt;/<span class="name">hello</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>如此就对from这个变量绑定了</p>
+<p>3.使用&amp;来调用父作用域的函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">m1.controller(<span class="string">'MyCtrl'</span>, [<span class="string">'$scope'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123;</div><div class="line">  $scope.sayHello=<span class="function"><span class="keyword">function</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line">    alert(<span class="string">"Hello "</span>+name + age);</div><div class="line">  &#125;</div><div class="line">&#125;])</div><div class="line">m1.directive(<span class="string">"greeting"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    restrict:<span class="string">'AE'</span>,</div><div class="line">      scope:&#123;</div><div class="line">        greet:<span class="string">'&amp;'</span></div><div class="line">      &#125;,</div><div class="line">      template:<span class="string">'&lt;input type="text" ng-model="userName" /&gt;&lt;br/&gt;'</span>+</div><div class="line">               <span class="string">'&lt;input type="text" ng-model="age" /&gt;&lt;br/&gt;'</span>+</div><div class="line">           <span class="string">'&lt;button class="btn btn-default" ng-click="greet(&#123;name:userName,age:age&#125;)"&gt;Greeting&lt;/button&gt;&lt;br/&gt;'</span></div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"MyCtrl"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">greeting</span> <span class="attr">greet</span>=<span class="string">"sayHello(name,age)"</span>&gt;</span><span class="tag">&lt;/<span class="name">greeting</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">greeting</span> <span class="attr">greet</span>=<span class="string">"sayHello(name,age)"</span>&gt;</span><span class="tag">&lt;/<span class="name">greeting</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">greeting</span> <span class="attr">greet</span>=<span class="string">"sayHello(name,age)"</span>&gt;</span><span class="tag">&lt;/<span class="name">greeting</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>如此便可以调用父作用略的函数了</p>
+<h2 id="在link中使用第4个参数parentControllerInstance"><a href="#在link中使用第4个参数parentControllerInstance" class="headerlink" title="在link中使用第4个参数parentControllerInstance"></a>在link中使用第4个参数parentControllerInstance</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">m1.directive(<span class="string">'outerDirective'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    scope: &#123;&#125;,</div><div class="line">    restrict: <span class="string">'AE'</span>,</div><div class="line">    controller: <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;      </div><div class="line">      <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params">someDirective</span>) </span>&#123; </div><div class="line">         <span class="built_in">console</span>.log(<span class="string">'Got:'</span> + someDirective.message);</div><div class="line">      &#125;;</div><div class="line">    &#125;</div><div class="line">   &#125;;</div><div class="line">&#125;);</div><div class="line">m1.directive(<span class="string">'innerDirective'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    scope: &#123;&#125;,</div><div class="line">    restrict: <span class="string">'AE'</span>,</div><div class="line">    <span class="built_in">require</span>: <span class="string">'^outerDirective'</span>,</div><div class="line">    link: <span class="function"><span class="keyword">function</span>(<span class="params">scope, elem, attrs, controllerInstance</span>) </span>&#123;</div><div class="line">      scope.message = <span class="string">"Hi,leifeng"</span>;</div><div class="line">      controllerInstance.say(scope);</div><div class="line">   &#125;</div><div class="line">  &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>如上在内部指令中link的第4个参数就是父作用域中controller的实例。<br>同时注意require属性的值。<br><code>^</code>表示如果果在当前的指令没有找到所需的控制器，则会查找父元素的控制器<br><code>?</code>如果在当前的指令没有找到所需的控制器，则会将undefined传给link连接函数的第四个参数<br>没有前缀，指令会在自身提供的控制器中进行查找，如果找不到任何控制器，则会抛出一个error</p>
+
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/angular/">angular</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/angular/">angular</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2016/11/23/blog004/" data-title="自定义指令 | Umbrella Zwl Hexo" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/11/18/blog003/"  title="uiRoute,angular路由,state">
+ <strong>NEXT:</strong><br/> 
+ <span>uiRoute,angular路由,state
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>
+
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本用法"><span class="toc-number">1.</span> <span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#link"><span class="toc-number">2.</span> <span class="toc-text">link</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scope及其绑定策略"><span class="toc-number">3.</span> <span class="toc-text">scope及其绑定策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在link中使用第4个参数parentControllerInstance"><span class="toc-number">4.</span> <span class="toc-text">在link中使用第4个参数parentControllerInstance</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/angular/" title="angular">angular<sup>2</sup></a></li>
+		
+			<li><a href="/categories/css3/" title="css3">css3<sup>1</sup></a></li>
+		
+			<li><a href="/categories/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/categories/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/angular/" title="angular">angular<sup>2</sup></a></li>
+		
+			<li><a href="/tags/css3/" title="css3">css3<sup>1</sup></a></li>
+		
+			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/hexo开始/" title="hexo开始">hexo开始<sup>1</sup></a></li>
+		
+			<li><a href="/tags/html5/" title="html5">html5<sup>1</sup></a></li>
+		
+			<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		
+			<li><a href="/tags/媒体查询/" title="媒体查询">媒体查询<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://yoursite.com" target="_blank" title="Umbrella Zwl">Umbrella Zwl</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

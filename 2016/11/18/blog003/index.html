@@ -38,7 +38,7 @@
 				<h1 class="site-name"><a href="/" title="Umbrella Zwl Hexo">Umbrella Zwl Hexo</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -51,7 +51,7 @@
 					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:yoursite.com">
 					</form>
 					
@@ -75,7 +75,7 @@
     </p>
   <p class="article-time">
     <time datetime="2016-11-17T16:00:00.000Z" itemprop="datePublished">2016-11-18</time>
-    更新日期:<time datetime="2016-11-18T06:53:59.241Z" itemprop="dateModified">2016-11-18</time>
+    Updated:<time datetime="2016-11-23T06:43:09.353Z" itemprop="dateModified">2016-11-23</time>
     
   </p>
 </header>
@@ -83,8 +83,8 @@
 		
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装使用"><span class="toc-number">1.</span> <span class="toc-text">安装使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖和配置"><span class="toc-number">2.</span> <span class="toc-text">依赖和配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#state的父子级"><span class="toc-number">3.</span> <span class="toc-text">state的父子级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#激活state"><span class="toc-number">4.</span> <span class="toc-text">激活state</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路由接收参数"><span class="toc-number">5.</span> <span class="toc-text">路由接收参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#resolve属性"><span class="toc-number">6.</span> <span class="toc-text">resolve属性</span></a></li></ol>
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装使用"><span class="toc-number">1.</span> <span class="toc-text">安装使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖和配置"><span class="toc-number">2.</span> <span class="toc-text">依赖和配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#state的父子级"><span class="toc-number">3.</span> <span class="toc-text">state的父子级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#激活state"><span class="toc-number">4.</span> <span class="toc-text">激活state</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路由接收参数"><span class="toc-number">5.</span> <span class="toc-text">路由接收参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#resolve属性"><span class="toc-number">6.</span> <span class="toc-text">resolve属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#state相关事件"><span class="toc-number">7.</span> <span class="toc-text">state相关事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ui-router的onEnter和onExit事件"><span class="toc-number">8.</span> <span class="toc-text">ui-router的onEnter和onExit事件</span></a></li></ol>
 		</div>
 		
 		<p>由于时间紧迫这里我就不讲ngRouter了，项目中大多也会使用uiRouter，<br>而且uiRouter包含了ngRouter的所有功能，所以这里我就直接开讲uiRouter了</p>
@@ -100,7 +100,10 @@
 <h2 id="路由接收参数"><a href="#路由接收参数" class="headerlink" title="路由接收参数"></a>路由接收参数</h2><p>在<code>stateconfig</code>中通过params属性设置路由参数，<br>也可以在url中带上参数，例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.state(<span class="string">'my.buy'</span>, &#123;</div><div class="line">  url: <span class="string">'/buy/&#123;id: [0-9]&#125;/detail/&#123;month&#125;'</span>,</div><div class="line">  params: &#123;</div><div class="line">    code: <span class="literal">null</span></div><div class="line">  &#125;,</div><div class="line">  templateUrl: <span class="string">'static/partials/my.buy.html'</span>,</div><div class="line">  controller: <span class="string">'BuyController'</span>,</div><div class="line">  controllerAs: <span class="string">'vm'</span>,</div><div class="line">  belong: <span class="string">'trade'</span>,</div><div class="line">  authenticate: <span class="literal">true</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
 <p>如上的配置，就可以在BuyController中通过$stateParams获取到id，month，以及params中的值了。<br>如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">BuyController</span>(<span class="params">$stateParams</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log($stateParams.id)</div><div class="line">  <span class="built_in">console</span>.log($stateParams.month)</div><div class="line">  <span class="built_in">console</span>.log($stateParams.code)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="resolve属性"><a href="#resolve属性" class="headerlink" title="resolve属性"></a>resolve属性</h2><p>resolve属性的值是一个对象，<br>这个对象可以被注入到controller中去从而提供使用<br>如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">.state(<span class="string">'activities'</span>,&#123;</div><div class="line">    url: <span class="string">'/activities'</span>,</div><div class="line">    controller: <span class="string">'AlLActivitiesController'</span>,</div><div class="line">    controllerAs: <span class="string">'activities'</span>,</div><div class="line">    templateUrl: <span class="string">'/app/templates/allActivities.html'</span>,</div><div class="line">    resolve: &#123;<span class="comment">//这里设置resolve属性</span></div><div class="line">        activities: <span class="function"><span class="keyword">function</span>(<span class="params">dataService</span>)</span>&#123;</div><div class="line">            <span class="keyword">return</span> dataService.getAllActivites();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">AllActivitiesController</span>(<span class="params">dataService, notifier, $state, activities</span>)</span>&#123;<span class="comment">//这里注入resolve中设置的activities</span></div><div class="line">  <span class="keyword">var</span> vm = <span class="keyword">this</span>;</div><div class="line">  </div><div class="line">  vm.selectedMonth = <span class="number">1</span>;</div><div class="line">  vm.allActivities = activities;<span class="comment">//使用</span></div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>其他的属性例如data以及其他的属性，都可以在$state.current来获得当前状态的配置中看到<br>至此，uirouter大致用法就这么多<br>参考链接<a href="http://www.cnblogs.com/darrenji/p/4982533.html" target="_blank" rel="external">http://www.cnblogs.com/darrenji/p/4982533.html</a></p>
+<p>其他的属性例如data以及其他的属性，都可以在$state.current来获得当前状态的配置中看到</p>
+<h2 id="state相关事件"><a href="#state相关事件" class="headerlink" title="state相关事件"></a>state相关事件</h2><p>当使用ui-router时，切换不同的state分别有<br><code>$stateChangeSuccess</code><code>$stateNotFound</code><code>$stateChangeError</code>等事件。<br>当angular模块执行run的时候，可以给<code>$rootScope</code>绑定相关事件，example：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">app.run(<span class="string">'$rootScope'</span>,<span class="string">'$log'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$rootScope, $log</span>)</span>&#123;</div><div class="line">  $rootScope.$on(<span class="string">'$stateChangeSuccess'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event, toState, toParams, fromState, fromParams</span>)</span>&#123;</div><div class="line">    $rootScope.currentState = toState.name;</div><div class="line">    $log.debug(<span class="string">'event'</span>, event);</div><div class="line">    $log.debug(<span class="string">'toState'</span>, toState);</div><div class="line">    $log.debug(<span class="string">'toParams'</span>, toParams);</div><div class="line">    $log.debug(<span class="string">'fromState'</span>, fromState);</div><div class="line">    $log.debug(<span class="string">'fromParams'</span>, fromParams);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  $rootScope.$on(<span class="string">'$stateNotFound'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event, unfoundState, fromState, fromParams</span>)</span>&#123;</div><div class="line">    $log.error(<span class="string">'The request state was not found: '</span> + unfoundState);</div><div class="line">  &#125;);</div><div class="line">        </div><div class="line">  $rootScope.$on(<span class="string">'$stateChangeError'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event, toState, toParams, fromState, fromParams, error</span>)</span>&#123;</div><div class="line">    $log.error(<span class="string">'An error occurred while changing states: '</span> + error);</div><div class="line">      </div><div class="line">    $log.debug(<span class="string">'event'</span>, event);</div><div class="line">    $log.debug(<span class="string">'toState'</span>, toState);</div><div class="line">    $log.debug(<span class="string">'toParams'</span>, toParams);</div><div class="line">    $log.debug(<span class="string">'fromState'</span>, fromState);</div><div class="line">    $log.debug(<span class="string">'fromParams'</span>, fromParams);</div><div class="line">  &#125;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h2 id="ui-router的onEnter和onExit事件"><a href="#ui-router的onEnter和onExit事件" class="headerlink" title="ui-router的onEnter和onExit事件"></a>ui-router的onEnter和onExit事件</h2><p>onEnter和onExit事件在配置路由的时候作为一个属性写进去就好了，例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">.state(<span class="string">'myprofile'</span>,&#123;</div><div class="line">  url:<span class="string">'/myprofile'</span>,</div><div class="line">  controller:<span class="string">'MyprofileController'</span>,</div><div class="line">  controllerAs: <span class="string">'myprofile'</span>,</div><div class="line">  templateUrl: <span class="string">'/app/tempaltes/myprofile.html'</span>,</div><div class="line">  onEnter: <span class="function"><span class="keyword">function</span>(<span class="params">$log</span>)</span>&#123;</div><div class="line">    $log.debug(<span class="string">'Entering the classrooms state'</span>);</div><div class="line">  &#125;,</div><div class="line">  onExit: <span class="function"><span class="keyword">function</span>(<span class="params">$log</span>)</span>&#123;</div><div class="line">    $log.debug(<span class="string">'Existing the classrooms state'</span>);</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>至此，uirouter大致用法就这么多<br>参考链接<a href="http://www.cnblogs.com/darrenji/p/4982533.html" target="_blank" rel="external">http://www.cnblogs.com/darrenji/p/4982533.html</a></p>
 
 	</div>
 		<footer class="article-footer clearfix">
@@ -129,6 +132,14 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2016/11/23/blog004/" title="自定义指令">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  自定义指令</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2016/08/30/blog002/"  title="响应式图片srcset,picture">
@@ -143,23 +154,23 @@
 	
 </div>
 
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装使用"><span class="toc-number">1.</span> <span class="toc-text">安装使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖和配置"><span class="toc-number">2.</span> <span class="toc-text">依赖和配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#state的父子级"><span class="toc-number">3.</span> <span class="toc-text">state的父子级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#激活state"><span class="toc-number">4.</span> <span class="toc-text">激活state</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路由接收参数"><span class="toc-number">5.</span> <span class="toc-text">路由接收参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#resolve属性"><span class="toc-number">6.</span> <span class="toc-text">resolve属性</span></a></li></ol>
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装使用"><span class="toc-number">1.</span> <span class="toc-text">安装使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖和配置"><span class="toc-number">2.</span> <span class="toc-text">依赖和配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#state的父子级"><span class="toc-number">3.</span> <span class="toc-text">state的父子级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#激活state"><span class="toc-number">4.</span> <span class="toc-text">激活state</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路由接收参数"><span class="toc-number">5.</span> <span class="toc-text">路由接收参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#resolve属性"><span class="toc-number">6.</span> <span class="toc-text">resolve属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#state相关事件"><span class="toc-number">7.</span> <span class="toc-text">state相关事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ui-router的onEnter和onExit事件"><span class="toc-number">8.</span> <span class="toc-text">ui-router的onEnter和onExit事件</span></a></li></ol>
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分类</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
-			<li><a href="/categories/angular/" title="angular">angular<sup>1</sup></a></li>
+			<li><a href="/categories/angular/" title="angular">angular<sup>2</sup></a></li>
 		
 			<li><a href="/categories/css3/" title="css3">css3<sup>1</sup></a></li>
 		
@@ -173,10 +184,10 @@
 
   
 <div class="tagslist">
-	<p class="asidetitle">标签</p>
+	<p class="asidetitle">Tags</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/angular/" title="angular">angular<sup>1</sup></a></li>
+			<li><a href="/tags/angular/" title="angular">angular<sup>2</sup></a></li>
 		
 			<li><a href="/tags/css3/" title="css3">css3<sup>1</sup></a></li>
 		
@@ -195,7 +206,7 @@
 
 
   <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+	<a href="null" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
