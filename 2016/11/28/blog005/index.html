@@ -1,0 +1,356 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>vue1.0组件 | Umbrella Zwl Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Umbrella Zwl">
+    
+    <meta name="description" content="vue1.0组件基本步骤：1. 创建组件构造器：123var Aaa = Vue.extend(&amp;#123;  template: &#39;&amp;lt;h3&amp;gt;我是组件&amp;lt;/h3&amp;gt;&#39;&amp;#125;)
+如上首先利用Vue.extend来创建组件构造器，相当于扩展了Vue这个构造函数(类)
+2.注册组">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Umbrella Zwl Hexo" title="Umbrella Zwl Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Umbrella Zwl Hexo">Umbrella Zwl Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post moveMain" itemscope itemprop="blogPost">
+	<article itemprop="articleBody">
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/11/28/blog005/" title="vue1.0组件" itemprop="url">vue1.0组件</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Umbrella Zwl">Umbrella Zwl</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-11-27T16:00:00.000Z" itemprop="datePublished">2016-11-28</time>
+    Updated:<time datetime="2016-11-29T03:13:53.628Z" itemprop="dateModified">2016-11-29</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vue1-0组件基本步骤："><span class="toc-number">1.</span> <span class="toc-text">vue1.0组件基本步骤：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-创建组件构造器："><span class="toc-number">1.1.</span> <span class="toc-text">1. 创建组件构造器：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-注册组件"><span class="toc-number">1.2.</span> <span class="toc-text">2.注册组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#局部注册"><span class="toc-number">1.3.</span> <span class="toc-text">局部注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父子组件通信之子组件使用父组件数据—props"><span class="toc-number">1.4.</span> <span class="toc-text">父子组件通信之子组件使用父组件数据—props</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父子组件通信之父组件获取子组件数据—通过自定义事件"><span class="toc-number">1.5.</span> <span class="toc-text">父子组件通信之父组件获取子组件数据—通过自定义事件</span></a></li></ol></li></ol>
+		</div>
+		
+		<h2 id="vue1-0组件基本步骤："><a href="#vue1-0组件基本步骤：" class="headerlink" title="vue1.0组件基本步骤："></a>vue1.0组件基本步骤：</h2><h3 id="1-创建组件构造器："><a href="#1-创建组件构造器：" class="headerlink" title="1. 创建组件构造器："></a>1. 创建组件构造器：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Aaa = Vue.extend(&#123;</div><div class="line">  template: <span class="string">'&lt;h3&gt;我是组件&lt;/h3&gt;'</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>如上首先利用<code>Vue.extend</code>来创建组件构造器，相当于扩展了Vue这个构造函数(类)</p>
+<h3 id="2-注册组件"><a href="#2-注册组件" class="headerlink" title="2.注册组件"></a>2.注册组件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//全局注册组件</span></div><div class="line">Vue.component(<span class="string">'aaa'</span>,Aaa)</div></pre></td></tr></table></figure>
+<p>这样的话，我们就可以直接使用在html里面直接使用aaa这个组件了</p>
+<script async src="//jsfiddle.net/umbrellazwl/kfr4xbef/embed/js,html,result/dark/"></script>
+
+<h3 id="局部注册"><a href="#局部注册" class="headerlink" title="局部注册"></a>局部注册</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//局部注册组件</span></div><div class="line"><span class="keyword">var</span> vm=<span class="keyword">new</span> Vue(&#123;</div><div class="line">  el:<span class="string">'#box'</span>,</div><div class="line">  components:&#123; <span class="comment">//局部组件</span></div><div class="line">    aaa:Aaa</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<script async src="//jsfiddle.net/umbrellazwl/kfr4xbef/1/embed/js,html,result/dark/"></script>
+当然我们也可以把定义和注册一次写好，而不用分开写，如：
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Vue.component(<span class="string">'aaa'</span>,&#123;</div><div class="line">  template: <span class="string">'&lt;h3&gt;我是组件&lt;/h3&gt;'</span>,</div><div class="line">  data()&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      msg: <span class="string">'定义和注册'</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+
+### 模板解析
+除了使用Vue.extend来定义，还可以使用template来解析，如下
+<script async src="//jsfiddle.net/umbrellazwl/kfr4xbef/4/embed/js,html,result/dark/"></script>
+
+<h3 id="父子组件通信之子组件使用父组件数据—props"><a href="#父子组件通信之子组件使用父组件数据—props" class="headerlink" title="父子组件通信之子组件使用父组件数据—props"></a>父子组件通信之子组件使用父组件数据—props</h3><p>“prop” 是组件数据的一个字段，期望从父组件传下来。子组件需要显式地用 props 选项 声明 props：<br>在父组件aaa中传递一个mmm的prop，并且这个mmm的值是aaa数据中的msg，如：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">"aaa"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;&#123;msg&#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bbb</span> <span class="attr">:mmm</span>=<span class="string">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="name">bbb</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">"bbb"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">h3</span>&gt;</span>我是子组件--&gt;&#123;&#123;mmm&#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在javascript中需要显示声明<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> vm=<span class="keyword">new</span> Vue(&#123;</div><div class="line">  el:<span class="string">'#box'</span>,</div><div class="line">  components: &#123;</div><div class="line">    <span class="string">'aaa'</span>: &#123;</div><div class="line">      template: <span class="string">'#aaa'</span>,</div><div class="line">      data()&#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">          msg: <span class="string">'我是父组件'</span></div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      components: &#123;</div><div class="line">        <span class="string">'bbb'</span>: &#123;</div><div class="line">          template: <span class="string">'#bbb'</span>,</div><div class="line">          props: [<span class="string">'mmm'</span>],</div><div class="line">          data()&#123;</div><div class="line">            <span class="keyword">return</span> &#123;</div><div class="line">            </div><div class="line">            &#125;</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<script async src="//jsfiddle.net/umbrellazwl/kfr4xbef/9/embed/js,html,result/dark/"></script>
+
+<h3 id="父子组件通信之父组件获取子组件数据—通过自定义事件"><a href="#父子组件通信之父组件获取子组件数据—通过自定义事件" class="headerlink" title="父子组件通信之父组件获取子组件数据—通过自定义事件"></a>父子组件通信之父组件获取子组件数据—通过自定义事件</h3><script async src="//jsfiddle.net/umbrellazwl/kfr4xbef/12/embed/js,html,result/dark/"></script>
+
+
+
+
+
+
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/vue1-0组件/">vue1.0组件</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/vue/">vue</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2016/11/28/blog005/" data-title="vue1.0组件 | Umbrella Zwl Hexo" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/11/23/blog004/"  title="自定义指令">
+ <strong>NEXT:</strong><br/> 
+ <span>自定义指令
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>
+
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vue1-0组件基本步骤："><span class="toc-number">1.</span> <span class="toc-text">vue1.0组件基本步骤：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-创建组件构造器："><span class="toc-number">1.1.</span> <span class="toc-text">1. 创建组件构造器：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-注册组件"><span class="toc-number">1.2.</span> <span class="toc-text">2.注册组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#局部注册"><span class="toc-number">1.3.</span> <span class="toc-text">局部注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父子组件通信之子组件使用父组件数据—props"><span class="toc-number">1.4.</span> <span class="toc-text">父子组件通信之子组件使用父组件数据—props</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父子组件通信之父组件获取子组件数据—通过自定义事件"><span class="toc-number">1.5.</span> <span class="toc-text">父子组件通信之父组件获取子组件数据—通过自定义事件</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/angular/" title="angular">angular<sup>2</sup></a></li>
+		
+			<li><a href="/categories/css3/" title="css3">css3<sup>1</sup></a></li>
+		
+			<li><a href="/categories/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/categories/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		
+			<li><a href="/categories/vue/" title="vue">vue<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/angular/" title="angular">angular<sup>2</sup></a></li>
+		
+			<li><a href="/tags/css3/" title="css3">css3<sup>1</sup></a></li>
+		
+			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/hexo开始/" title="hexo开始">hexo开始<sup>1</sup></a></li>
+		
+			<li><a href="/tags/html5/" title="html5">html5<sup>1</sup></a></li>
+		
+			<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		
+			<li><a href="/tags/vue1-0组件/" title="vue1.0组件">vue1.0组件<sup>1</sup></a></li>
+		
+			<li><a href="/tags/媒体查询/" title="媒体查询">媒体查询<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://yoursite.com" target="_blank" title="Umbrella Zwl">Umbrella Zwl</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
