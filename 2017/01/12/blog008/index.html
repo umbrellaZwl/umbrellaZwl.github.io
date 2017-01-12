@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>响应式图片srcset,picture | Umbrella</title>
+    <title>react-lifecycle | Umbrella</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Umbrella Zwl">
     
-    <meta name="description" content="srcset,sizes通过设置srcset，seze，w描述符等来提供图片资源和断点至于选择加载哪个最佳图片，完全交给浏览器去智能判断
-12&amp;lt;img src=&quot;example.jpg&quot; alt=&quot;example&quot;     srcset=&quot;example.jpg 128w, example2.">
+    <meta name="description" content="好久没有写博客，最近一直学习react的东西，当自己入个小门吧。今天就来分享一下react当中十分重要的，关于组件的生命周期吧！
+组件生命周期1.挂载组件componentWillMount 组件即将挂载，会在render之前执行，这个阶段组件的dom结构还没有生成，无法获取DOMNode。由于是在">
     
     
     
@@ -66,15 +66,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/08/30/blog002/" title="响应式图片srcset,picture" itemprop="url">响应式图片srcset,picture</a>
+      <a href="/2017/01/12/blog008/" title="react-lifecycle" itemprop="url">react-lifecycle</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="Umbrella Zwl">Umbrella Zwl</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-08-29T16:00:00.000Z" itemprop="datePublished">2016-08-30</time>
-    Updated:<time datetime="2016-08-30T08:33:38.129Z" itemprop="dateModified">2016-08-30</time>
+    <time datetime="2017-01-11T16:00:00.000Z" itemprop="datePublished">2017-01-12</time>
+    Updated:<time datetime="2017-01-12T05:24:54.907Z" itemprop="dateModified">2017-01-12</time>
     
   </p>
 </header>
@@ -83,34 +83,35 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#srcset-sizes"><span class="toc-number">1.</span> <span class="toc-text">srcset,sizes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过picture标签来匹配不同查询"><span class="toc-number">2.</span> <span class="toc-text">通过picture标签来匹配不同查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#尺寸匹配"><span class="toc-number">2.1.</span> <span class="toc-text">尺寸匹配</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#组件生命周期"><span class="toc-number">1.</span> <span class="toc-text">组件生命周期</span></a></li></ol>
 		</div>
 		
-		<h2 id="srcset-sizes"><a href="#srcset-sizes" class="headerlink" title="srcset,sizes"></a>srcset,sizes</h2><p>通过设置srcset，seze，w描述符等来提供图片资源和断点<br>至于选择加载哪个最佳图片，完全交给浏览器去智能判断</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"example.jpg"</span> <span class="attr">alt</span>=<span class="string">"example"</span></span></div><div class="line">     <span class="attr">srcset</span>=<span class="string">"example.jpg 128w, example2.jpg 256w, example3.jpg 512w"</span>&gt;</div></pre></td></tr></table></figure>
-<p>看上述这段代码，我们给浏览器提供了3张不同大小的图片<br>其中w是一个描述符，w用来描述文件的宽度<br>这样浏览器会自动匹配最佳图片</p>
-<p>再看下面这段代码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"example.jpg"</span> <span class="attr">alt</span>=<span class="string">"example"</span></span></div><div class="line">     <span class="attr">srcset</span>=<span class="string">"example.jpg 128w, example2.jpg 256w, example3.jpg 512w"</span></div><div class="line">     <span class="attr">sizes</span>=<span class="string">"(max-width: 360px) calc(100vw - 20px), 128px"</span>&gt;</div></pre></td></tr></table></figure>
-<p>通过sizes来指定断点，上述这段代码表示<br>当视区宽度不大于360px的时候，制定图片宽度为视区宽度减去20px，否则其他情况图片宽度为128px<br>有一个设备宽度360px的手机，设备像素比是1(去除干扰)，那么加载哪张图片呢？</p>
-<p><strong>分析：</strong></p>
-<p>通过calc的计算，图片宽度为340px，提供的三个图片资源只有512w能满足，所以会加载最后一张图片</p>
-<h2 id="通过picture标签来匹配不同查询"><a href="#通过picture标签来匹配不同查询" class="headerlink" title="通过picture标签来匹配不同查询"></a>通过picture标签来匹配不同查询</h2><h3 id="尺寸匹配"><a href="#尺寸匹配" class="headerlink" title="尺寸匹配"></a>尺寸匹配</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">picture</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">media</span>=<span class="string">"(max-width: 800px)"</span></span></div><div class="line">          <span class="attr">srcset</span>=<span class="string">"example.jpg 400w, example2.jpg 800w, example3.jpg 1200w"</span></div><div class="line">          <span class="attr">sizes</span>=<span class="string">"(min-width: 530px) calc(100vw - 96px), 100vw"</span>&gt;</div><div class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"example.jpg"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">picture</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>上述代码会首先让窗体去匹配source的查询，匹配到了则继续在该source里面的srcset进行选择<br>没有匹配到的则使用img里面的srcset</p>
+		<p>好久没有写博客，最近一直学习react的东西，当自己入个小门吧。<br>今天就来分享一下react当中十分重要的，关于组件的生命周期吧！</p>
+<h3 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h3><p>1.挂载组件<br><code>componentWillMount</code> 组件即将挂载，会在render之前执行，这个阶段组件的dom结构还没有生成，无法获取DOMNode。<br>由于是在render之前执行，所以可以在这个周期函数里面进行一些初始的操作，比如获取数据了之后去更新state。<br><code>componentDidMount</code> 组件已经挂载，会在render之后执行，此时dom结构已经生产，可以通过<code>this.getDOMNode</code><br>获取原生dom节点，给dom绑定事件监听等。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">getInitialState: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'getInitialState'</span>)</div><div class="line">  <span class="keyword">return</span> <span class="literal">null</span></div><div class="line">&#125;,</div><div class="line">getDefaultProps: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'getDefaultProps'</span>)</div><div class="line">&#125;,</div><div class="line">componentWillMount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'componentWillMount'</span>)</div><div class="line">&#125;,</div><div class="line">componentDidMount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'componentDidMount'</span>)</div><div class="line">  <span class="built_in">console</span>.log( <span class="keyword">this</span>.getDOMNode() )</div><div class="line">&#125;,</div><div class="line">render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'render'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以上代码的执行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getDefaultProps--&gt;getInitialState--&gt;componentWillMount--&gt;render--&gt;componentDidMount</div></pre></td></tr></table></figure></p>
+<p>2.卸载组件<br><code>componentWillUnmount</code> 组件即将被卸载，在执行<code>React.unmountComponentAtNode( 原生dom节点 )</code>之前<br>会调用该周期函数,在该函数中，用来执行各种清除操作。比如组件当中定义的setInterval。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">componentWillUnmount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'kill me 0.0'</span>)</div><div class="line">  clearInterval(<span class="keyword">this</span>.timer)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>3.更新组件<br><code>componentWillUpdate</code> 组件即将更新时调用<br><code>componentDidUpdate</code> 组件更新后调用,这两个周期都可以获取到dom节点<br><code>shouldComponentUpdate</code> 在组件更新之前判断是否应该更新，最终需要返回一个boolean，例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">shouldComponentUpdate:<span class="function"><span class="keyword">function</span>(<span class="params">nextProp,nextState</span>)</span>&#123;</div><div class="line">  <span class="keyword">if</span>(nextProp.count&gt; <span class="keyword">this</span>.props.count) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>componentWillReceiveProps</code> 子组件从父组件获得了props时会调用</p>
 
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/html5/">html5</a><a href="/tags/css3/">css3</a>
+  <span></span> <a href="/tags/react-lifecycle/">react-lifecycle</a>
   </div>
 
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/react/">react</a>
+</div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2016/08/30/blog002/" data-title="响应式图片srcset,picture | Umbrella" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2017/01/12/blog008/" data-title="react-lifecycle | Umbrella" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -119,19 +120,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/11/18/blog003/" title="uiRoute,angular路由,state">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  uiRoute,angular路由,state</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/08/25/hello-world/"  title="Hello World">
+<a href="/2016/11/30/blog007/"  title="vue-router">
  <strong>NEXT:</strong><br/> 
- <span>Hello World
+ <span>vue-router
 </span>
 </a>
 </div>
@@ -145,7 +138,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#srcset-sizes"><span class="toc-number">1.</span> <span class="toc-text">srcset,sizes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过picture标签来匹配不同查询"><span class="toc-number">2.</span> <span class="toc-text">通过picture标签来匹配不同查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#尺寸匹配"><span class="toc-number">2.1.</span> <span class="toc-text">尺寸匹配</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#组件生命周期"><span class="toc-number">1.</span> <span class="toc-text">组件生命周期</span></a></li></ol>
   </div>
 
 <div id="asidepart">
